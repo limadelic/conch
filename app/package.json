@@ -1,0 +1,35 @@
+{
+    "name": "cmd",
+    "version": "0.0.1",
+    "description" : "cmd in the browser",
+    "homepage" : "https://www-cmd.com",
+    "repository" : { "type" : "git", "url" : "https://github.com/limadelic/cmd.git" },
+    "keywords" : ["shell", "devops"],
+    "author" : "limadelic <limadelic@gmail.com>",
+    "contributors" : [
+        "Isel Fernandez <isel_77@hotmail.com>",
+        "Mike Suarez <mikemps@gmail.com>"
+    ],
+    "licenses" : ["MIT"],
+    "dependencies": {
+        "coffee-script": "latest",
+        "underscore": "latest",
+        "jade": "latest",
+        "connect-assets": "latest",
+        "express": "latest"
+    },
+    "devDependencies": {
+        "mocha": "latest",
+        "nodemon": "latest",
+        "should": "latest"
+    },
+    "engines": {
+        "node": ">=0.6",
+        "npm": ">=1.1"
+    },
+    "scripts": {
+        "posttest": "coffee -cl -o lib src",
+        "test": "nodemon -w src -w test node_modules/mocha/bin/mocha",
+        "start": "nodemon -w src node_modules/coffee-script/bin/coffee app.coffee"
+    }
+}

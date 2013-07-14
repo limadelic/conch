@@ -1,0 +1,1 @@
+require(requirejs_config, ['cs!cmd']);
