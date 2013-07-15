@@ -16,6 +16,9 @@
         "underscore": "latest",
         "jade": "latest",
         "connect-assets": "latest",
+        "requirejs": "latest",
+        "backbone": "latest",
+        "jquery": "latest",
         "express": "latest"
     },
     "devDependencies": {

@@ -7,3 +7,5 @@ define [
 
   class Shell extends Backbone.Model
 
+    run: (cmd, output) ->
+      output 'dir ...'
