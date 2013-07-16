@@ -9,6 +9,6 @@ define [
   class Shell extends Backbone.Model
 
     run: (cmd, output) ->
-      socket = io.connect 'http://localhost'
+      socket = io.connect 'http://localhost:8888'
       socket.on 'connect', ->
         output 'dir ...'
