@@ -19,12 +19,12 @@
         "requirejs": "latest",
         "backbone": "latest",
         "jquery": "latest",
-        "socket.io-client": "latest",
         "express": "latest"
     },
     "devDependencies": {
         "mocha": "latest",
         "nodemon": "latest",
+        "ws": "latest",
         "should": "latest"
     },
     "engines": {

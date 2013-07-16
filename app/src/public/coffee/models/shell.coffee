@@ -1,14 +1,17 @@
 define [
   'underscore'
   'backbone'
-  'socket.io-client'
 ],
 
-(_, Backbone, io) ->
+(_, Backbone) ->
 
   class Shell extends Backbone.Model
 
-    run: (cmd, output) ->
-      socket = io.connect 'http://localhost:8888'
-      socket.on 'connect', ->
-        output 'dir ...'
+    constructor: ->
+      @socket = new WebSocket 'ws://localhost:8888'
+
+    run: (cmd, out) -> @socket.onopen =>
+      @socket.onmessage out
+      @socket.send cmd
+
+
