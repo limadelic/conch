@@ -1,11 +1,14 @@
 define [
   'underscore'
   'backbone'
+  'socket.io-client'
 ],
 
-(_, Backbone) ->
+(_, Backbone, io) ->
 
   class Shell extends Backbone.Model
 
     run: (cmd, output) ->
-      output 'dir ...'
+      socket = io.connect 'http://localhost'
+      socket.on 'connect', ->
+        output 'dir ...'

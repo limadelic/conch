@@ -4,4 +4,4 @@
 --require test/test_helper.coffee
 --reporter spec
 --globals sut
--t 130000
+-t 5000

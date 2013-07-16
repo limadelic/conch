@@ -19,6 +19,7 @@
         "requirejs": "latest",
         "backbone": "latest",
         "jquery": "latest",
+        "socket.io-client": "latest",
         "express": "latest"
     },
     "devDependencies": {
