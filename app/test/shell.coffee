@@ -5,5 +5,5 @@ describe 'Shell', ->
   it 'run dir', (done) ->
 
     sut.run 'dir', (output) ->
-      output.should.eql 'dir ...'
+      output.should.match /Directory of C\:/
       done()
