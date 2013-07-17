@@ -2,4 +2,4 @@ source :rubygems
 
 gemspec
 
-gem "em-websocket", '>= 0.5'
+gem 'em-websocket', '>= 0.5'
