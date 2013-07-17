@@ -1,7 +1,7 @@
 require [
-  'cs!utils/router'
   'cs!utils/debug'
+  'cs!utils/router'
 ],
 
-(Router) -> new Router
+(d, Router) -> new Router
 

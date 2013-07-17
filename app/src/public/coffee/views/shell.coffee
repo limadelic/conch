@@ -11,3 +11,8 @@ define [
 
     initialize: ->
       window.shell = @
+
+    render: ->
+      @$('#cmd').focus()
+      @$('#output').text('dir dir')
+      @
