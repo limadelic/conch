@@ -1,1 +1,1 @@
-require(requirejs_config, ['cs!cmd']);
+require(requirejs_config, ['cs!conch']);

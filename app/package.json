@@ -1,9 +1,9 @@
 {
-    "name": "cmd",
+    "name": "conch",
     "version": "0.0.1",
-    "description" : "cmd in the browser",
-    "homepage" : "https://www-cmd.com",
-    "repository" : { "type" : "git", "url" : "https://github.com/limadelic/cmd.git" },
+    "description" : "shell in the browser",
+    "homepage" : "https://c0nch.com",
+    "repository" : { "type" : "git", "url" : "https://github.com/limadelic/conch.git" },
     "keywords" : ["shell", "devops"],
     "author" : "limadelic <limadelic@gmail.com>",
     "contributors" : [
