@@ -31,8 +31,8 @@ define [
 
     write: (cmd, msg) =>
       @out.text @lines = """
-        > #{cmd}\n
-        #{msg}\n
+        > #{cmd}
+        #{msg}
         #{@lines}
       """
       @render()

@@ -9,7 +9,7 @@ body, input, pre {
     font-size: x-large;
 }
 
-input, input:focus {
+input, pre, input:focus {
     margin-left: 5px;
     border: none;
     outline: 0;
