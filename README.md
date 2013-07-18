@@ -4,10 +4,10 @@
 
 ## Install
 ```
-gem install conch
+> gem install conch
 ```
 
 ## Run
 ```
-conch
+> conch
 ```
