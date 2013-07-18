@@ -1,4 +1,4 @@
-![logo](https://raw.github.com/limadelic/conch/master/docs/logo_s.png)
+![logo](https://raw.github.com/limadelic/conch/master/docs/banner.png)
 > drive your computer from your browser    
 > (like a boss)
 
