@@ -2,7 +2,7 @@ html, body, table {
     margin: 2px;
 }
 
-body, input {
+body, input, pre {
     background-color: #000000;
     color: lime;
     font-family: Consolas, Monaco, Lucida Console, Courier New, monospace, serif;

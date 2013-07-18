@@ -10,8 +10,8 @@ define [
     constructor: ->
       @socket = new WebSocket 'ws://localhost:8888'
 
-    run: (cmd, out) -> @socket.onopen =>
-      @socket.onmessage out
+    run: (cmd, out) ->
+      @socket.onmessage = out
       @socket.send cmd
 
 

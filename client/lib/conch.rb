@@ -4,6 +4,8 @@ require 'em-websocket'
 
 EM.run do
   EM::WebSocket.run host: 'localhost', port: 8888 do |ws|
-    ws.onmessage { |msg| ws.send `#{msg}` }
+    ws.onmessage do |msg|
+      ws.send msg.length > 0 ? `#{msg}` : ''
+    end
   end
 end
