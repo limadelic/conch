@@ -10,8 +10,10 @@ body, input, pre {
     font-size: x-large;
 }
 
-input, pre, input:focus {
+input, input:focus {
     margin-left: 5px;
     border: none;
     outline: 0;
 }
+
+pre { margin: 0;}
