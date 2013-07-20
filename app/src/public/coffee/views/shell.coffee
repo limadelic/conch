@@ -10,11 +10,11 @@ define [
     el: 'body'
 
     events:
-      'keypress #cmd': 'enter'
+      'keypress': 'typing'
 
     initialize: ->
       window.shell = @
-      @lines = ''
+      @log = ''
       @cmd = @$ '#cmd'
       @out = @$ '#output'
 
@@ -23,16 +23,19 @@ define [
       @cmd.focus()
       @
 
-    enter: (e) ->
-      return unless e.keyCode is 13
-      p cmd = @cmd.val()
+    typing: (e) ->
+      @cmd.focus()
+      @run() if e.keyCode is 13 
+
+    run: ->
+      cmd = @cmd.val()
       @model.run cmd, (out) =>
         @write cmd, out.data
 
-    write: (cmd, msg) =>
-      @out.text @lines = """
+    write: (cmd, output) =>
+      output += '\n' if output.length > 0
+      @out.text @log = """
         > #{cmd}
-        #{msg}
-        #{@lines}
+        #{output}#{@log}
       """
       @render()
