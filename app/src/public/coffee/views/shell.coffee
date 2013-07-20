@@ -19,16 +19,21 @@ define [
       @out = @$ '#output'
 
     render: ->
-      @cmd.val ''
-      @cmd.focus()
+      @focus()
       @
 
     typing: (e) ->
+      if e.keyCode is 13
+      then @run()
+      else @focus()
+
+    focus: ->
+      return if @cmd.is ':focus'
       @cmd.focus()
-      @run() if e.keyCode is 13 
 
     run: ->
       cmd = @cmd.val()
+      @cmd.val ''
       @model.run cmd, (out) =>
         @write cmd, out.data
 
@@ -38,4 +43,3 @@ define [
         > #{cmd}
         #{output}#{@log}
       """
-      @render()
