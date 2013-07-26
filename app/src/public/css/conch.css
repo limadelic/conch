@@ -1,19 +1,33 @@
 html, body {
-    margin: 2px;
+    margin: 0;
     word-wrap: break-word;
 }
 
-body, input, pre {
+body, textarea, pre {
     background-color: #000000;
     color: lime;
     font-family: Consolas, Monaco, Lucida Console, Courier New, monospace, serif;
     font-size: x-large;
 }
 
-input, input:focus {
-    margin-left: 5px;
+textarea, textarea:focus {
+    text-indent: 0.55em;
+    width: 100%;
+    overflow: hidden;
+    height: auto;
     border: none;
     outline: 0;
+    position: absolute;
+    left: 0;
+    background-color: transparent;
+    padding: 0;
 }
 
-pre { margin: 0;}
+pre {
+    margin: 0;
+}
+
+#prompt {
+    margin: 0;
+    width: 100%;
+}

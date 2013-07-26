@@ -5,6 +5,7 @@ window.requirejs_config = {
         cs: '/js/cs',
         'coffee-script': '/js/coffee-script',
         underscore: '/js/underscore',
+        autosize: '/js/jquery.autosize-min',
         backbone: '/js/backbone'
     },
     shim: {

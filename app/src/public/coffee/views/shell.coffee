@@ -1,6 +1,7 @@
 define [
   'underscore'
   'backbone'
+  'autosize'
 ],
 
 (_, Backbone) ->
@@ -15,17 +16,25 @@ define [
     initialize: ->
       window.shell = @
       @log = ''
+      @prompt = @$ '#prompt'
       @cmd = @$ '#cmd'
+      @cmd.autosize()
       @out = @$ '#output'
 
     render: ->
+      @align()
       @focus()
       @
 
+    align: ->
+      p @prompt.find('span:last').width()
+
+
     typing: (e) ->
       if e.keyCode is 13
-      then @run()
-      else @focus()
+        @run()
+        e.preventDefault()
+      else @render()
 
     focus: ->
       return if @cmd.is ':focus'
@@ -40,6 +49,6 @@ define [
     write: (cmd, output) =>
       output += '\n' if output.length > 0
       @out.text @log = """
-        > #{cmd}
+        >#{cmd}
         #{output}#{@log}
       """
