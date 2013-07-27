@@ -1,6 +1,8 @@
 require 'em-websocket'
 
-`start www.c0nch.com`
+home = 'http://www.c0nch.com'
+
+`start chrome --app=#{home}`
 
 def run(socket, cmd)
   socket.send `#{cmd}`
