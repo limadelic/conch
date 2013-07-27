@@ -1,14 +1,14 @@
 require 'em-websocket'
 
-module Listener
+module Client
 
-  def self.run(socket, cmd)
+  def self.run socket, cmd
     socket.send `#{cmd}`
   rescue
     socket.send ''
   end
 
-  def self.listen_on(socket)
+  def self.listen_on socket
     socket.onmessage { |cmd| run socket, cmd }
   end
 

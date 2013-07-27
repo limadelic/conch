@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'conch'
-  s.version       = '0.0.5'
+  s.version       = '0.0.6'
   s.summary       = 'shell in the browser'
   s.authors       = ['limadelic']
   s.email         = 'limadelic@gmail.com'

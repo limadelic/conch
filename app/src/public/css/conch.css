@@ -15,6 +15,7 @@ html, body, #prompt, #cmd, #output {
 }
 
 #cmd, #cmd:focus {
+    resize: none;
     text-indent: 0.55em;
     width: 100%;
     border: none;

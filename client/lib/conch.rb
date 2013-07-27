@@ -1,7 +1,8 @@
-require_relative 'listener'
+require_relative 'client'
 
 home = 'http://www.c0nch.com'
 
 `start chrome --app=#{home}`
-Listener.start
+Client.start
+
 
