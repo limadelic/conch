@@ -1,5 +1,6 @@
 html, body, #prompt, #cmd, #output {
     margin: 0;
+    padding: 0;
     word-wrap: break-word;
     background-color: #000000;
     color: lime;
@@ -8,19 +9,15 @@ html, body, #prompt, #cmd, #output {
 }
 
 #prompt {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 #cmd, #cmd:focus {
     text-indent: 0.55em;
     width: 100%;
-    overflow: hidden;
-    height: auto;
     border: none;
     outline: 0;
-    position: absolute;
-    top: 0;
-    left: 0;
     background-color: transparent;
-    padding: 0;
 }
