@@ -1,6 +1,7 @@
 define [
   'underscore'
   'backbone'
+  'autosize'
 ],
 
 (_, Backbone) ->
@@ -10,29 +11,34 @@ define [
     el: 'body'
 
     events:
-      'keypress #cmd': 'enter'
+      'keypress': 'typing'
 
     initialize: ->
       window.shell = @
-      @lines = ''
+      @log = ''
       @cmd = @$ '#cmd'
+      @cmd.autosize()
       @out = @$ '#output'
 
     render: ->
-      @cmd.val ''
       @cmd.focus()
       @
 
-    enter: (e) ->
-      return unless e.keyCode is 13
-      p cmd = @cmd.val()
+    typing: (e) ->
+      if e.keyCode is 13
+        @run()
+        e.preventDefault()
+      else @cmd.focus()
+
+    run: ->
+      cmd = @cmd.val()
+      @cmd.val ''
       @model.run cmd, (out) =>
         @write cmd, out.data
 
-    write: (cmd, msg) =>
-      @out.text @lines = """
-        > #{cmd}
-        #{msg}
-        #{@lines}
+    write: (cmd, output) =>
+      output += '\n' if output.length > 0
+      @out.text @log = """
+        >#{cmd}
+        #{output}#{@log}
       """
-      @render()

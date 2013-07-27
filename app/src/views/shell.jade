@@ -1,7 +1,6 @@
 extends layout
 
 block content
-  #cursor-line
-    >
-    input#cmd(ng-selected="true")
+  #prompt >
+  textarea#cmd(rows="1")
   pre#output

@@ -1,16 +1,23 @@
-html, body, table {
-    margin: 2px;
-}
-
-body, input, pre {
+html, body, #prompt, #cmd, #output {
+    margin: 0;
+    padding: 0;
+    word-wrap: break-word;
     background-color: #000000;
     color: lime;
     font-family: Consolas, Monaco, Lucida Console, Courier New, monospace, serif;
     font-size: x-large;
 }
 
-input, pre, input:focus {
-    margin-left: 5px;
+#prompt {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#cmd, #cmd:focus {
+    text-indent: 0.55em;
+    width: 100%;
     border: none;
     outline: 0;
+    background-color: transparent;
 }
