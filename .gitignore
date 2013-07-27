@@ -1,5 +1,6 @@
 .idea
 node_modules
-app\lib
+app/lib
 *.swp
 Gemfile.lock
+client/pkg
