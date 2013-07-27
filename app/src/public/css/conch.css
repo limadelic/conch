@@ -1,16 +1,17 @@
-html, body {
+html, body, #prompt, #cmd, #output {
     margin: 0;
     word-wrap: break-word;
-}
-
-body, textarea, pre {
     background-color: #000000;
     color: lime;
     font-family: Consolas, Monaco, Lucida Console, Courier New, monospace, serif;
     font-size: x-large;
 }
 
-textarea, textarea:focus {
+#prompt {
+    position: relative;
+}
+
+#cmd, #cmd:focus {
     text-indent: 0.55em;
     width: 100%;
     overflow: hidden;
@@ -18,16 +19,8 @@ textarea, textarea:focus {
     border: none;
     outline: 0;
     position: absolute;
+    top: 0;
     left: 0;
     background-color: transparent;
     padding: 0;
-}
-
-pre {
-    margin: 0;
-}
-
-#prompt {
-    margin: 0;
-    width: 100%;
 }

@@ -16,29 +16,19 @@ define [
     initialize: ->
       window.shell = @
       @log = ''
-      @prompt = @$ '#prompt'
       @cmd = @$ '#cmd'
       @cmd.autosize()
       @out = @$ '#output'
 
     render: ->
-      @align()
-      @focus()
+      @cmd.focus()
       @
-
-    align: ->
-      p @prompt.find('span:last').width()
-
 
     typing: (e) ->
       if e.keyCode is 13
         @run()
         e.preventDefault()
-      else @render()
-
-    focus: ->
-      return if @cmd.is ':focus'
-      @cmd.focus()
+      else @cmd.focus()
 
     run: ->
       cmd = @cmd.val()
