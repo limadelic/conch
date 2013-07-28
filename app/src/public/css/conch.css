@@ -1,4 +1,4 @@
-html, body, #prompt, #cmd, #output {
+html, body, #prompt, #cmd, #out {
     margin: 0;
     padding: 0;
     word-wrap: break-word;

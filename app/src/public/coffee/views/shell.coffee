@@ -11,7 +11,7 @@ define [
     el: 'body'
 
     events:
-      'keypress': 'typing'
+      'keypress': 'keypress'
 
     initialize: ->
       window.shell = @
@@ -19,20 +19,21 @@ define [
       @cmd = @$ '#cmd'
       @cmd.autosize()
 
-      @out = @$ '#output'
+      @out = @$ '#out'
       @model.out = (log) => @out.text log
 
     render: ->
       @cmd.focus()
       @
 
-    typing: (e) ->
-      if e.keyCode is 13
-        @run()
-        e.preventDefault()
-      else @cmd.focus()
+    keypress: (@e) ->
+      @run() or @cmd.focus()
 
     run: ->
+      return unless @e.keyCode is 13
+
       @model.cmd = @cmd.val()
-      @cmd.val ''
       @model.run()
+
+      @cmd.val ''
+      @e.preventDefault()
