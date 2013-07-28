@@ -12,6 +12,7 @@ define [
 
     events:
       'keypress': 'keypress'
+      'keyup': 'keyup'
 
     initialize: ->
       window.shell = @
@@ -26,8 +27,8 @@ define [
       @cmd.focus()
       @
 
-    keypress: (@e) ->
-      @run() or @cmd.focus()
+    keypress: (@e) -> @run() or @cmd.focus()
+    keyup: (@e) -> @esc()
 
     run: ->
       return unless @e.keyCode is 13
@@ -35,5 +36,10 @@ define [
       @model.cmd = @cmd.val()
       @model.run()
 
+      @clear()
+
+    esc: -> @clear() if @e.keyCode is 27
+
+    clear: ->
       @cmd.val ''
       @e.preventDefault()
