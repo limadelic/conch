@@ -13,9 +13,13 @@ define [
       @log = ''
 
     run: ->
-      return if @cmd.length is 0
-      @[@cmd]?() or
+      @run_cmd() or
       @socket.send @cmd
+
+    run_cmd: ->
+      return true if @cmd.length is 0
+      return unless @cmd in ['exit', 'cls']
+      @[@cmd]()
 
     exit: -> window.close()
     cls: -> @out @log = ''
