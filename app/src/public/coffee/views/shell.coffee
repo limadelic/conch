@@ -15,10 +15,12 @@ define [
 
     initialize: ->
       window.shell = @
-      @log = ''
+
       @cmd = @$ '#cmd'
       @cmd.autosize()
+
       @out = @$ '#output'
+      @model.out = (log) => @out.text log
 
     render: ->
       @cmd.focus()
@@ -31,14 +33,6 @@ define [
       else @cmd.focus()
 
     run: ->
-      cmd = @cmd.val()
+      @model.cmd = @cmd.val()
       @cmd.val ''
-      @model.run cmd, (out) =>
-        @write cmd, out.data
-
-    write: (cmd, output) =>
-      output += '\n' if output.length > 0
-      @out.text @log = """
-        >#{cmd}
-        #{output}#{@log}
-      """
+      @model.run()
