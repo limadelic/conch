@@ -3,6 +3,18 @@ require 'em-websocket'
 module Client
 
   def self.run socket, cmd
+    if respond_to? cmd
+      send cmd
+    else
+      shell socket, cmd
+    end
+  end
+
+  def self.exit
+    exit! true
+  end
+
+  def self.shell socket, cmd
     socket.send `#{cmd}`
   rescue
     socket.send ''
