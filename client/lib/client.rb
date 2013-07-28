@@ -1,10 +1,11 @@
 require 'em-websocket'
+require 'json'
 
 module Client
 
   def self.run socket, cmd
-    if respond_to? cmd
-      send cmd
+    if respond_to? cmd['cmd']
+      send cmd['cmd']
     else
       shell socket, cmd
     end
@@ -15,14 +16,16 @@ module Client
   end
 
   def self.shell socket, cmd
-    socket.send `#{cmd}`
+    Dir.chdir cmd['cwd'] do
+      socket.send `#{cmd['cmd']}`
+    end
   rescue
     socket.send ''
   end
 
   def self.listen_on socket
     socket.onopen { socket.send Dir.pwd }
-    socket.onmessage { |cmd| run socket, cmd }
+    socket.onmessage { |cmd| run socket, JSON.parse(cmd) }
   end
 
   def self.start

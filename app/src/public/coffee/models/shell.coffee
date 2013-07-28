@@ -17,10 +17,15 @@ define [
       @socket.onmessage = @log_msg
 
     run: ->
-      @run_cmd() or
-      @socket.send @cmd
+      @run_on_browser() or
+      @run_on_client()
 
-    run_cmd: ->
+    run_on_client: ->
+      @socket.send JSON.stringify
+        cmd: @cmd
+        cwd: @cwd
+
+    run_on_browser: ->
       return true if @cmd.length is 0
       return unless @cmd in ['exit', 'cls']
       @[@cmd]()
