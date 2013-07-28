@@ -21,6 +21,7 @@ module Client
   end
 
   def self.listen_on socket
+    socket.onopen { socket.send Dir.pwd }
     socket.onmessage { |cmd| run socket, cmd }
   end
 

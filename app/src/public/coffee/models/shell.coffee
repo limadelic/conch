@@ -9,8 +9,12 @@ define [
 
     constructor: ->
       @socket = new WebSocket 'ws://localhost:8888'
-      @socket.onmessage = @log_msg
+      @socket.onmessage = @connect
       @log = ''
+
+    connect: (msg) =>
+      document.title = @cwd = msg.data
+      @socket.onmessage = @log_msg
 
     run: ->
       @run_cmd() or
