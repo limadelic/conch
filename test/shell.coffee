@@ -8,6 +8,14 @@ describe 'Shell', ->
       out.should.match /Directory of C\:/
       done()
 
+  describe 'cls', ->
+    
+    it 'clears the output', (done) ->
+
+      $ 'cls', (out) ->
+        out.should.eql ''
+        done()
+
   describe 'exit', ->
 
     it 'closes the browser', (done) ->
