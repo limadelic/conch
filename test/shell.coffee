@@ -7,3 +7,9 @@ describe 'Shell', ->
     $ 'dir', (out) ->
       out.should.match /Directory of C\:/
       done()
+
+  describe 'exit', ->
+
+    it 'closes the browser', (done) ->
+      global.window = close: done
+      $ 'exit'
