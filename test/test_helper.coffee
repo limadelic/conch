@@ -3,7 +3,7 @@ require './sut'
 global.requirejs = require 'requirejs'
 
 requirejs.config
-  baseUrl: "#{__dirname}/../src/public/coffee/"
+  baseUrl: "#{__dirname}/../app/src/public/coffee/"
   nodeRequire: require
   paths:
     cs: '../js/cs'
