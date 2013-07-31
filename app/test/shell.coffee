@@ -4,6 +4,6 @@ describe 'Shell', ->
 
   it 'run dir', (done) ->
 
-    sut.run 'dir', (output) ->
-      output.should.match /Directory of C\:/
+    $ 'dir', (out) ->
+      out.should.match /Directory of C\:/
       done()

@@ -2,4 +2,13 @@ global.new_sut = (file) ->
   beforeEach (done) ->
     requirejs ["cs!#{file}"], (Sut) ->
       global.sut = new Sut
-      done()
+      wait_for_client done
+
+global.$ = (cmd, out) ->
+  sut.out = out
+  sut.run cmd
+
+wait_for_client = (done) ->
+  sut.socket.onmessage = (msg) ->
+    sut.connect msg
+    done()

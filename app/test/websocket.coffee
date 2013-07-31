@@ -4,8 +4,8 @@ global.WebSocket = class
 
   constructor: (url) ->
     @ws = new WSocket url
+    @ws.on 'message', @on_message
 
-  onopen: (open) -> @ws.on 'open', open
-  onmessage: (open) -> @ws.on 'message', open
-  onclose: (open) -> @ws.on 'close', open
+  on_message: (msg) => @onmessage data: msg
+
   send: (msg) -> @ws.send msg

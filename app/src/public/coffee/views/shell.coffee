@@ -32,10 +32,7 @@ define [
 
     run: ->
       return unless @e.keyCode is 13
-
-      @model.cmd = @cmd.val()
-      @model.run()
-
+      @model.run @cmd.val()
       @clear()
 
     esc: -> @clear() if @e.keyCode is 27

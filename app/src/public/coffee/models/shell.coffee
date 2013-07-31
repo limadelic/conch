@@ -16,7 +16,7 @@ define [
       document.title = @cwd = msg.data
       @socket.onmessage = @log_msg
 
-    run: ->
+    run: (@cmd) ->
       @run_on_browser() or
       @run_on_client()
 
