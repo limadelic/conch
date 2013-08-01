@@ -31,7 +31,10 @@ define [
       @[@cmd]()
 
     exit: -> window.close()
-    cls: -> @out @log = ''
+
+    cls: ->
+      @out @log = ''
+      true
 
     log_msg: (msg) => @out @log = """
       >#{@cmd}
