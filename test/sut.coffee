@@ -10,5 +10,5 @@ global.$ = (cmd, out) ->
 
 wait_for_client = (done) ->
   sut.socket.onmessage = (msg) ->
-    sut.connect msg
+    sut.new_cwd msg
     done()

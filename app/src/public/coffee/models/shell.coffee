@@ -9,15 +9,10 @@ define [
 
     constructor: ->
       @socket = new WebSocket 'ws://localhost:8888'
-      @expect @connect
+      @expect @new_cwd
       @log = ''
 
-    expect: (do_something) ->
-      @socket.onmessage = do_something
-
-    connect: (msg) =>
-      document.title = @cwd = msg.data
-      @expect @console_log
+    expect: (cb) -> @socket.onmessage = cb
 
     run: (@cmd) ->
       @run_on_browser() or
@@ -36,8 +31,13 @@ define [
 
     parse_cmd: -> @cmd.split(' ')[0]
 
-    cd: -> @expect @new_cwd
-    new_cwd: (@cwd) => @expect @console_log
+    cd: ->
+      @expect @new_cwd
+      false
+
+    new_cwd: (msg) =>
+      document.title = @cwd = msg.data
+      @expect @console_log
 
     exit: -> window.close()
 
