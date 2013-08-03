@@ -8,6 +8,22 @@ describe 'Shell', ->
       out.should.match /Directory of C\:/
       done()
 
+  it 'show current dir on title', ->
+    document.title.should.match /conch$/
+
+  describe 'cd', ->
+
+    it 'should change title', (done) ->
+      $ 'cd client', ->
+        document.title.should.match /client$/
+        done()
+
+#    it 'should change dirs', (done) ->
+#        $ 'dir', (out) ->
+#          out.should.match /Gemfile/
+#          done()
+
+
   describe 'cls', ->
     
     it 'clears the output', (done) ->

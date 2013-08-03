@@ -27,8 +27,17 @@ define [
 
     run_on_browser: ->
       return true if @cmd.length is 0
-      return unless @cmd in ['exit', 'cls']
-      @[@cmd]()
+      [cmd, args] = @parse_cmd()
+      return unless cmd in ['exit', 'cls', 'cd']
+      @[cmd].apply @, args
+
+    parse_cmd: ->
+      tokens = @cmd.split ' '
+      [tokens[0], tokens[1..]]
+
+    cd: (@cwd) ->
+      document.title = @cwd
+      true
 
     exit: -> window.close()
 
