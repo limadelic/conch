@@ -2,7 +2,7 @@ describe 'Shell', ->
 
   new_sut 'models/shell'
 
-  it 'run dir', (done) ->
+  it 'dir', (done) ->
 
     $ 'dir', (out) ->
       out.should.match /Directory of C\:/
@@ -10,10 +10,10 @@ describe 'Shell', ->
 
   describe 'cd', ->
 
-    it 'show current dir on title', ->
+    it 'show dir on title', ->
       document.title.should.match /conch$/
 
-    it 'should change title and dir', (done) ->
+    it 'change title and dir', (done) ->
 
       $ 'cd client', ->
         document.title.should.match /client$/
@@ -21,6 +21,13 @@ describe 'Shell', ->
           out.should.match /Gemfile/
           done()
 
+    it 'on error keep dir and show message', (done) ->
+      original_title = document.title
+
+      $ 'cd crap', (out) ->
+        document.title.should.eql original_title
+        out.should.match /cannot find/
+        done()
 
   describe 'cls', ->
     

@@ -27,7 +27,7 @@ define [
       return true if @cmd.length is 0
       cmd = @parse_cmd()
       return unless cmd in ['exit', 'cls', 'cd']
-      @[cmd].apply @, args
+      @[cmd]()
 
     parse_cmd: -> @cmd.split(' ')[0]
 

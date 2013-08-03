@@ -7,13 +7,11 @@ module Cmd
   def run cmd
     parse cmd
     custom_cmd or
-      @socket.send shell
+    @socket.send shell
   end
 
   def shell
-    Dir.chdir(@cwd) { `#{@cmd}` }
-  rescue
-    ''
+    Dir.chdir(@cwd) { `#{@cmd} 2>&1` }
   end
 
   def parse cmd
@@ -29,7 +27,7 @@ module Cmd
     send @app
   end
 
-  def exit;
+  def exit
     exit! true
   end
 
@@ -40,7 +38,7 @@ module Cmd
       end
     end
   rescue
-    @cwd
+    @socket.send @cwd
   ensure
     return false
   end
