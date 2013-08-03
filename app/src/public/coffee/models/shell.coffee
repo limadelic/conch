@@ -9,12 +9,15 @@ define [
 
     constructor: ->
       @socket = new WebSocket 'ws://localhost:8888'
-      @socket.onmessage = @connect
+      @expect @connect
       @log = ''
+
+    expect: (do_something) ->
+      @socket.onmessage = do_something
 
     connect: (msg) =>
       document.title = @cwd = msg.data
-      @socket.onmessage = @log_msg
+      @expect @console_log
 
     run: (@cmd) ->
       @run_on_browser() or
@@ -27,17 +30,14 @@ define [
 
     run_on_browser: ->
       return true if @cmd.length is 0
-      [cmd, args] = @parse_cmd()
+      cmd = @parse_cmd()
       return unless cmd in ['exit', 'cls', 'cd']
       @[cmd].apply @, args
 
-    parse_cmd: ->
-      tokens = @cmd.split ' '
-      [tokens[0], tokens[1..]]
+    parse_cmd: -> @cmd.split(' ')[0]
 
-    cd: (@cwd) ->
-      document.title = @cwd
-      true
+    cd: -> @expect @new_cwd
+    new_cwd: (@cwd) => @expect @console_log
 
     exit: -> window.close()
 
@@ -45,7 +45,7 @@ define [
       @out @log = ''
       true
 
-    log_msg: (msg) => @out @log = """
+    console_log: (msg) => @out @log = """
       >#{@cmd}
       #{msg.data}
       #{@log}

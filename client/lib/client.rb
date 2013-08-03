@@ -1,34 +1,42 @@
 require 'em-websocket'
 require 'json'
 
-def run socket, cmd
-  if respond_to? cmd['cmd']
-    send cmd['cmd']
-  else
-    shell socket, cmd
+def start
+  EM.run do
+    EM::WebSocket.run(
+      host: 'localhost',
+      port: 8888
+    ) { |socket| listen_on socket }
   end
-end
-
-def exit
-  exit! true
-end
-
-def shell socket, cmd
-  Dir.chdir cmd['cwd'] do
-    socket.send `#{cmd['cmd']}`
-  end
-rescue
-  socket.send ''
 end
 
 def listen_on socket
-  socket.onopen { socket.send Dir.pwd }
-  socket.onmessage { |cmd| run socket, JSON.parse(cmd) }
+  @socket = socket
+  @socket.onopen { socket.send Dir.pwd }
+  @socket.onmessage { |cmd| run cmd }
 end
 
-EM.run do
-  EM::WebSocket.run(
-    host: 'localhost',
-    port: 8888
-  ) { |socket| listen_on socket }
+def run cmd
+  parse cmd
+  if respond_to? @cmd
+    send @cmd
+  else
+    @socket.send shell
+  end
 end
+
+def parse cmd
+  cmd = JSON.parse cmd
+  @cmd = cmd['cmd']
+  @cwd = cmd['cwd']
+end
+
+def exit; exit! true end
+
+def shell
+  Dir.chdir(@cwd) { `#{@cmd}` }
+rescue
+  ''
+end
+
+start
