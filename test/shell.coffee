@@ -8,6 +8,19 @@ describe 'Shell', ->
       out.should.match /Directory of C\:/
       done()
 
+#  describe 'ctrl+c', ->
+#
+#    it 'breaks running proccesses', (done) ->
+#
+#      $ 'ping localhost /t', (out) ->
+#        out.should.match /Control-C/
+#        done()
+#
+#      setTimeout(
+#        -> $ '^C'
+#        3000
+#      )
+
   describe 'cd', ->
 
     it 'show dir on title', ->
