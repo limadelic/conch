@@ -1,3 +1,7 @@
+after (done) ->
+  p 'Bye!!'
+  done()
+
 describe 'Shell', ->
 
   new_sut 'models/shell'
