@@ -1,4 +1,5 @@
 require 'json'
+require 'open3'
 
 module Cmd
 
@@ -11,7 +12,10 @@ module Cmd
   end
 
   def shell
-    Dir.chdir(@cwd) { `#{@cmd} 2>&1` }
+    Dir.chdir(@cwd) do
+      stdin, stdout, stderr = Open3.popen3 @cmd
+      stdout.read + stderr.read
+    end
   end
 
   def parse cmd

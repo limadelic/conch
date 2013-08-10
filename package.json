@@ -35,7 +35,7 @@
         "pretest": "start ruby client/lib/client.rb",
         "test": "mocha",
         "coffee": "coffee -cl -o app/lib app/src",
-        "auto-test": "nodemon -w src -w test node_modules/mocha/bin/mocha",
-        "start": "nodemon -w src node_modules/coffee-script/bin/coffee app/app.coffee"
+        "auto-test": "nodemon -w app -w test -w client npm test",
+        "start": "nodemon -w app node_modules/coffee-script/bin/coffee app/app.coffee"
     }
 }

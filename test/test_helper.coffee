@@ -15,3 +15,5 @@ require './websocket'
 
 global.document = {}
 global.window = close: ->
+global.set_timeout = (delay, func) ->
+  setTimeout func, delay * 1000
