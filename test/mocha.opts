@@ -5,3 +5,4 @@
 --reporter spec
 --globals sut,window
 -t 5000
+-b

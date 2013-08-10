@@ -3,19 +3,36 @@ require 'open3'
 
 module Cmd
 
-  COMMANDS = ['exit', 'cd']
+  COMMANDS = ['exit', 'cd', '^C']
+  ALIAS = {
+    '^C' => 'ctrl_c'
+  }
 
   def run cmd
     parse cmd
     custom_cmd or
-    @socket.send shell
+      shell
   end
 
   def shell
-    Dir.chdir(@cwd) do
-      stdin, stdout, stderr = Open3.popen3 @cmd
-      stdout.read + stderr.read
-    end
+    cmd = "#{@cmd} 2>&1"
+    @in, @out, @wait_thr = Open3.popen2 cmd, chdir: @cwd
+    Thread.new { wait_for_cmd }
+  end
+
+  def close
+    @out.close
+    @in.close
+  rescue
+  end
+
+  def wait_for_cmd
+    out = ln = ''
+    out += ln while ln = @out.gets
+  rescue
+  ensure
+    close
+    @socket.send out
   end
 
   def parse cmd
@@ -27,12 +44,19 @@ module Cmd
   end
 
   def custom_cmd
+    p @app
     return unless COMMANDS.include? @app
-    send @app
+    send ALIAS[@app] || @app
   end
 
   def exit
     exit! true
+  end
+
+  def ctrl_c
+    p 'gonna ^C!!'
+    Process.kill 'INT', @wait_thr[:pid]
+    true
   end
 
   def cd
