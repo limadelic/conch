@@ -1,10 +1,6 @@
-after (done) ->
-  p 'Bye!!'
-  done()
+new_sut 'models/shell'
 
 describe 'Shell', ->
-
-  new_sut 'models/shell'
 
   it 'dir', (done) ->
 
@@ -47,7 +43,7 @@ describe 'Shell', ->
         done()
 
   describe 'cls', ->
-    
+
     it 'clears the output', (done) ->
 
       $ 'cls', (out) ->
@@ -55,6 +51,10 @@ describe 'Shell', ->
         done()
 
   describe 'exit', ->
+
+    after ->
+      global.window = close: ->
+      sut.run_on_client = Sut.prototype.run_on_client
 
     it 'closes the browser', (done) ->
 

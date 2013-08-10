@@ -14,3 +14,4 @@ global.m = (x) -> p (name for name of x)
 require './websocket'
 
 global.document = {}
+global.window = close: ->

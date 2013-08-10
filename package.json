@@ -32,8 +32,10 @@
         "npm": ">=1.1"
     },
     "scripts": {
-        "posttest": "coffee -cl -o lib src",
-        "test": "nodemon -w src -w test node_modules/mocha/bin/mocha",
+        "pretest": "start ruby client/lib/client.rb",
+        "test": "mocha",
+        "coffee": "coffee -cl -o app/lib app/src",
+        "auto-test": "nodemon -w src -w test node_modules/mocha/bin/mocha",
         "start": "nodemon -w src node_modules/coffee-script/bin/coffee app/app.coffee"
     }
 }
