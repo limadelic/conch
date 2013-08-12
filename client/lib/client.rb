@@ -15,4 +15,3 @@ EM.run do
     @socket.onmessage { |cmd| run cmd }
   end
 end
-

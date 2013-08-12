@@ -8,15 +8,14 @@ describe 'Shell', ->
       out.should.match /Directory of C\:/
       done()
 
-  describe.skip 'ctrl+c', ->
+  describe 'ctrl+c', ->
 
     it 'breaks running proccesses', (done) ->
 
       $ 'ping localhost /t'
-      set_timeout 3, ->
+      set_timeout 2, ->
         $ '^C', (out) ->
-          p out
-          #        out.should.match /Control-C/
+          out.should.match /Reply from/
           done()
 
 

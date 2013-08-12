@@ -1,7 +1,11 @@
 require 'json'
 require 'open3'
+require 'win32/process'
+require 'sys/proctable'
 
 module Cmd
+
+  include Sys
 
   COMMANDS = ['exit', 'cd', '^C']
   ALIAS = {
@@ -15,8 +19,12 @@ module Cmd
   end
 
   def shell
-    cmd = "#{@cmd} 2>&1"
-    @in, @out, @wait_thr = Open3.popen2 cmd, chdir: @cwd
+    @in, @out, @wait_thr =
+      Open3.popen2 "#{@cmd} 2>&1", {
+        chdir: @cwd#,
+        #new_pgroup: true
+      }
+
     Thread.new { wait_for_cmd }
   end
 
@@ -29,10 +37,9 @@ module Cmd
   def wait_for_cmd
     out = ln = ''
     out += ln while ln = @out.gets
-  rescue
   ensure
-    close
     @socket.send out
+    close
   end
 
   def parse cmd
@@ -44,19 +51,45 @@ module Cmd
   end
 
   def custom_cmd
-    p @app
     return unless COMMANDS.include? @app
     send ALIAS[@app] || @app
   end
 
+  def is_child?(proc)
+    [@wait_thr.pid, Process.pid].include? proc.ppid
+  end
+
+  def kill(proc)
+    Process.detach proc.pid
+    Process.kill 9, proc.pid
+  rescue
+    p 'crap'
+  end
+
+  def kill_children
+    ProcTable.ps do |proc|
+      if is_child? proc
+        p proc.name
+        Process.detach proc.pid
+      end
+    end
+  end
+
   def exit
-    exit! true
+    #p 'exit'
+    kill_children
+    #Process.kill 'INT', Process.pid
+    #EM.stop
+    #Kernel.exit true
+    abort
+    #true
   end
 
   def ctrl_c
-    p 'gonna ^C!!'
-    Process.kill 'INT', @wait_thr[:pid]
-    true
+    kill @wait_thr
+    close
+  ensure
+    return true
   end
 
   def cd
